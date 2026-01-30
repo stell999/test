@@ -63,7 +63,7 @@ const values = [
 
 function AboutPage() {
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1E3A5F]/20 to-transparent" />
@@ -75,18 +75,18 @@ function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <span className="inline-block text-[#B8860B] text-sm tracking-widest uppercase mb-4">
+              <span className="inline-block text-primary text-sm tracking-widest uppercase mb-4">
                 Our Story
               </span>
 
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-foreground mb-6">
                 50 Years of
-                <span className="block mt-2 text-white/60">
+                <span className="block mt-2 text-foreground/60">
                   Italian Excellence
                 </span>
               </h1>
 
-              <p className="text-white/60 text-lg leading-relaxed mb-6">
+              <p className="text-foreground/60 text-lg leading-relaxed mb-6">
                 Since 1974, Kozano has been synonymous with luxury home
                 appliances that transform kitchens into spaces of inspiration.
                 Born in the heart of Milan, our brand represents the perfect
@@ -94,7 +94,7 @@ function AboutPage() {
                 engineering.
               </p>
 
-              <p className="text-white/60 text-lg leading-relaxed">
+              <p className="text-foreground/60 text-lg leading-relaxed">
                 Each piece we create is more than an appliance—it's a work of
                 art, meticulously crafted to elevate your culinary journey and
                 become a cherished part of your home for generations.
@@ -121,7 +121,7 @@ function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="py-24 lg:py-32 border-t border-white/10">
+      <section className="py-24 lg:py-32 border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -130,10 +130,10 @@ function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
               Our Values
             </h2>
-            <p className="max-w-2xl mx-auto text-white/60 text-lg">
+            <p className="max-w-2xl mx-auto text-foreground/60 text-lg">
               The principles that guide everything we create
             </p>
           </motion.div>
@@ -146,15 +146,15 @@ function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors"
+                className="bg-foreground/5 border border-border/40 rounded-2xl p-8 hover:bg-foreground/10 transition-colors"
               >
-                <div className="w-12 h-12 rounded-full bg-[#B8860B]/20 flex items-center justify-center mb-6">
-                  <value.icon className="w-6 h-6 text-[#B8860B]" />
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+                  <value.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-white font-serif text-2xl mb-3">
+                <h3 className="text-foreground font-serif text-2xl mb-3">
                   {value.title}
                 </h3>
-                <p className="text-white/60">{value.description}</p>
+                <p className="text-foreground/60">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -162,7 +162,7 @@ function AboutPage() {
       </section>
 
       {/* Timeline Section */}
-      <section className="py-24 lg:py-32 border-t border-white/10">
+      <section className="py-24 lg:py-32 border-t border-border/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -171,17 +171,17 @@ function AboutPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
               Our Journey
             </h2>
-            <p className="max-w-2xl mx-auto text-white/60 text-lg">
+            <p className="max-w-2xl mx-auto text-foreground/60 text-lg">
               Five decades of innovation and excellence
             </p>
           </motion.div>
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent hidden lg:block" />
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border/80 to-transparent hidden lg:block" />
 
             <div className="space-y-12">
               {milestones.map((milestone, index) => (
@@ -198,19 +198,19 @@ function AboutPage() {
                   <div
                     className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : ''}`}
                   >
-                    <div className="inline-block bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8">
-                      <span className="text-[#B8860B] font-serif text-3xl block mb-2">
+                    <div className="inline-block bg-foreground/5 border border-border/40 rounded-2xl p-6 lg:p-8">
+                      <span className="text-primary font-serif text-3xl block mb-2">
                         {milestone.year}
                       </span>
-                      <h3 className="text-white font-serif text-2xl mb-2">
+                      <h3 className="text-foreground font-serif text-2xl mb-2">
                         {milestone.title}
                       </h3>
-                      <p className="text-white/60">{milestone.description}</p>
+                      <p className="text-foreground/60">{milestone.description}</p>
                     </div>
                   </div>
 
                   {/* Center dot */}
-                  <div className="hidden lg:block w-4 h-4 rounded-full bg-[#B8860B] border-4 border-[#0a0a0a] relative z-10" />
+                  <div className="hidden lg:block w-4 h-4 rounded-full bg-primary border-4 border-background relative z-10" />
 
                   <div className="flex-1" />
                 </motion.div>
@@ -221,7 +221,7 @@ function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 lg:py-32 border-t border-white/10">
+      <section className="py-24 lg:py-32 border-t border-border/40">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -229,16 +229,16 @@ function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
               Experience Kozano
             </h2>
-            <p className="text-white/60 text-lg mb-8">
-              Visit one of our showrooms worldwide to see our collection in
+            <p className="text-foreground/60 text-lg mb-8">
+              Visit one of our  worldwide to see our collection in
               person and speak with our expert team.
             </p>
             <a
               href="/agents"
-              className="inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 px-8 py-4 rounded-lg font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:opacity-90 px-8 py-4 rounded-lg font-medium transition-colors"
             >
               Find a Showroom
             </a>

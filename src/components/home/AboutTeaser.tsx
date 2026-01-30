@@ -24,7 +24,7 @@ export function AboutTeaser() {
   return (
     <section
       ref={containerRef}
-      className="relative py-24 lg:py-32 bg-gradient-to-b from-[#0a0a0a] via-[#0f0f14] to-[#0a0a0a] overflow-hidden"
+      className="relative py-24 lg:py-32 bg-gradient-to-b from-background via-background to-background overflow-hidden"
     >
       {/* Decorative Elements */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#1E3A5F]/10 rounded-full blur-3xl -translate-y-1/2" />
@@ -50,7 +50,7 @@ export function AboutTeaser() {
                 alt="Kozano craftsmanship"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
             </motion.div>
 
             {/* Floating Card */}
@@ -59,10 +59,10 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="absolute -bottom-8 -right-8 lg:right-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-6 max-w-[280px]"
+              className="absolute -bottom-8 -right-8 lg:right-8 bg-foreground/5 backdrop-blur-xl border border-border/40 rounded-xl p-6 max-w-[280px]"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B8860B] to-[#8B6914] flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-[#b1141b] flex items-center justify-center flex-shrink-0">
                   <svg
                     className="w-6 h-6 text-white"
                     fill="none"
@@ -78,10 +78,10 @@ export function AboutTeaser() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white font-medium mb-1">
+                  <h4 className="text-foreground font-medium mb-1">
                     5-Year Warranty
                   </h4>
-                  <p className="text-white/50 text-sm">
+                  <p className="text-foreground/60 text-sm">
                     Every product backed by our commitment to excellence
                   </p>
                 </div>
@@ -89,7 +89,7 @@ export function AboutTeaser() {
             </motion.div>
 
             {/* Decorative Frame */}
-            <div className="absolute -inset-4 border border-white/5 rounded-3xl -z-10" />
+            <div className="absolute -inset-4 border border-border/40 rounded-3xl -z-10" />
           </motion.div>
 
           {/* Content Side */}
@@ -99,7 +99,7 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="inline-block text-[#B8860B] text-sm tracking-widest uppercase mb-4"
+              className="inline-block text-primary text-sm tracking-widest uppercase mb-4"
             >
               Our Heritage
             </motion.span>
@@ -109,10 +109,10 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight"
+              className="font-serif text-4xl md:text-5xl text-foreground mb-6 leading-tight"
             >
               Crafting Excellence
-              <span className="block text-white/60">Since 1974</span>
+              <span className="block text-foreground/60">Since 1974</span>
             </motion.h2>
 
             <motion.p
@@ -120,7 +120,7 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-white/60 text-lg leading-relaxed mb-6"
+              className="text-foreground/60 text-lg leading-relaxed mb-6"
             >
               Born in the heart of Milan, Kozano has spent five decades
               perfecting the art of luxury home appliances. Our master craftsmen
@@ -133,7 +133,7 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-white/60 text-lg leading-relaxed mb-8"
+              className="text-foreground/60 text-lg leading-relaxed mb-8"
             >
               Each Kozano appliance is a testament to our unwavering commitment
               to quality, designed to become the centerpiece of your kitchen for
@@ -150,7 +150,7 @@ export function AboutTeaser() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-white/30 text-white hover:bg-white/10 h-12 px-6 group bg-transparent"
+                  className="border-primary/40 text-foreground hover:bg-primary/10 h-12 px-6 group bg-transparent"
                 >
                   Discover Our Story
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -164,7 +164,7 @@ export function AboutTeaser() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="grid grid-cols-2 gap-6 mt-12 pt-12 border-t border-white/10"
+              className="grid grid-cols-2 gap-6 mt-12 pt-12 border-t border-border/40"
             >
               {stats.map((stat, index) => (
                 <motion.div
@@ -174,10 +174,10 @@ export function AboutTeaser() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
                 >
-                  <div className="text-3xl md:text-4xl font-serif text-white mb-1">
+                  <div className="text-3xl md:text-4xl font-serif text-foreground mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-white/50 text-sm">{stat.label}</div>
+                  <div className="text-muted-foreground text-sm">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>

@@ -10,6 +10,7 @@ export const Route = createFileRoute('/_public/news')({
 
 const categories = [
   'All',
+  'Social',
   'Awards',
   'Sustainability',
   'Events',
@@ -27,17 +28,24 @@ function NewsPage() {
       : newsArticles.filter((article) => article.category === activeCategory)
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E3A5F]/20 to-transparent" />
+        <div className="absolute inset-0">
+          <img
+            src="/assets/cover.jpg"
+            alt="News Cover"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block text-[#B8860B] text-sm tracking-widest uppercase mb-4"
+            className="inline-block text-primary text-sm tracking-widest uppercase mb-4"
           >
             Latest Updates
           </motion.span>
@@ -55,7 +63,7 @@ function NewsPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-2xl mx-auto text-white/60 text-lg"
+            className="max-w-2xl mx-auto text-white/80 text-lg"
           >
             Stay informed about our latest innovations, partnerships, and the
             stories behind our luxury appliances.
@@ -64,7 +72,7 @@ function NewsPage() {
       </section>
 
       {/* Filter Bar */}
-      <section className="sticky top-20 z-40 bg-[#0a0a0a]/80 backdrop-blur-xl border-y border-white/10">
+      <section className="sticky top-20 z-40 bg-background/80 backdrop-blur-xl border-y border-border/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center gap-4 py-4 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
@@ -73,8 +81,8 @@ function NewsPage() {
                 onClick={() => setActiveCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
                   activeCategory === category
-                    ? 'bg-white text-black'
-                    : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
+                    ? 'bg-foreground text-background'
+                    : 'bg-foreground/5 text-foreground/70 hover:bg-foreground/10 hover:text-foreground'
                 }`}
               >
                 {category}
@@ -124,17 +132,17 @@ function NewsCard({ article, index }: NewsCardProps) {
     >
       <div className="block">
         {/* Image */}
-        <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-white/5">
+        <div className="relative aspect-[16/10] rounded-xl overflow-hidden mb-5 bg-foreground/5 border border-border/40">
           <img
             src={article.image}
             alt={article.title}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           {/* Category Badge */}
-          <div className="absolute top-4 left-4">
-            <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-white text-xs tracking-wider uppercase rounded-full border border-white/10">
+          <div className="absolute top-4 left-4 pointer-events-none">
+            <span className="px-3 py-1 bg-background/70 backdrop-blur-sm text-foreground text-xs tracking-wider uppercase rounded-full border border-border/40">
               {article.category}
             </span>
           </div>
@@ -143,23 +151,23 @@ function NewsCard({ article, index }: NewsCardProps) {
         {/* Content */}
         <div>
           {/* Date */}
-          <div className="flex items-center gap-2 text-white/40 text-sm mb-3">
+          <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
             <Calendar className="w-4 h-4" />
             <time dateTime={article.date}>{formattedDate}</time>
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-xl lg:text-2xl text-white mb-3 group-hover:text-[#C0C0C0] transition-colors line-clamp-2">
+          <h3 className="font-serif text-xl lg:text-2xl text-foreground mb-3 group-hover:text-muted-foreground transition-colors line-clamp-2">
             {article.title}
           </h3>
 
           {/* Excerpt */}
-          <p className="text-white/50 text-sm leading-relaxed line-clamp-3 mb-4">
+          <p className="text-foreground/60 text-sm leading-relaxed line-clamp-3 mb-4">
             {article.excerpt}
           </p>
 
           {/* Read More */}
-          <span className="inline-flex items-center gap-2 text-white/70 group-hover:text-white transition-colors text-sm">
+          <span className="inline-flex items-center gap-2 text-foreground/70 group-hover:text-foreground transition-colors text-sm">
             Read Article
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </span>

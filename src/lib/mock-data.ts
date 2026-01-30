@@ -121,7 +121,8 @@ export const products: Product[] = [
       '/assets/mix3.jpeg',
       '/assets/mix1.jpeg',
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl:
+      'https://www.youtube-nocookie.com/embed/sslfsM-gOMw?list=PLcesGDgG8rt5wMTLCgi8_TZqPWfwbrbRi&rel=0&modestbranding=1&playsinline=1',
     isFeatured: true,
     isNew: false,
   },
@@ -199,22 +200,19 @@ export const products: Product[] = [
         id: 'stainless-steel',
         name: 'Stainless Steel',
         hex: '#8B8B8B',
-        image:
-          'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=800&q=80',
+        image: '/assets/IMG_65FCB60F7E9F-21_2.jpeg',
       },
       {
         id: 'matte-black',
         name: 'Matte Black',
         hex: '#1a1a1a',
-        image:
-          'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=800&q=80',
+        image: '/assets/IMG_65FCB60F7E9F-27_2.jpeg',
       },
       {
         id: 'arctic-white',
         name: 'Arctic White',
         hex: '#F0F8FF',
-        image:
-          'https://images.unsplash.com/photo-1571175351734-1f0de2ecff52?w=800&q=80',
+        image: '/assets/IMG_65FCB60F7E9F-32_2.jpeg',
       },
     ],
     features: [
@@ -248,9 +246,9 @@ export const products: Product[] = [
       Warranty: '10 Years',
     },
     galleryImages: [
-      'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&q=80',
-      'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?w=600&q=80',
-      'https://images.unsplash.com/photo-1571175351734-1f0de2ecff52?w=600&q=80',
+      '/assets/IMG_65FCB60F7E9F-21_2.jpeg',
+      '/assets/IMG_65FCB60F7E9F-27_2.jpeg',
+      '/assets/IMG_65FCB60F7E9F-32_2.jpeg',
     ],
     isFeatured: true,
     isNew: false,
@@ -307,9 +305,238 @@ export const products: Product[] = [
       '/assets/exp.jpeg',
       '/assets/exp.jpeg',
     ],
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl:
+      'https://www.youtube-nocookie.com/embed/sslfsM-gOMw?list=PLcesGDgG8rt5wMTLCgi8_TZqPWfwbrbRi&rel=0&modestbranding=1&playsinline=1',
     isFeatured: false,
     isNew: true,
+  },
+  {
+    id: 'heritage-stand-mixer',
+    name: 'Heritage Stand Mixer',
+    category: 'Mixers',
+    tagline: 'Built for generations',
+    price: 1099,
+    description:
+      'The Kozano Heritage Stand Mixer pairs bold engineering with refined finishes. Designed for daily performance, it delivers consistent torque, smooth speed transitions, and a stable, vibration-resistant base.',
+    colors: [
+      {
+        id: 'graphite',
+        name: 'Graphite',
+        hex: '#2B2F36',
+        image: '/assets/IMG_65FCB60F7E9F-14.jpeg',
+      },
+      {
+        id: 'champagne',
+        name: 'Champagne',
+        hex: '#D6C7A1',
+        image: '/assets/IMG_65FCB60F7E9F-15.jpeg',
+      },
+      {
+        id: 'midnight',
+        name: 'Midnight',
+        hex: '#0F172A',
+        image: '/assets/IMG_65FCB60F7E9F-16.jpeg',
+      },
+    ],
+    features: [
+      {
+        title: 'High-Torque Drive',
+        description:
+          'Optimized power delivery for dense doughs, large batches, and long mixing sessions without overheating.',
+      },
+      {
+        title: 'Soft-Start Control',
+        description:
+          'Starts gently to reduce splash, then ramps smoothly to your selected speed for clean, consistent results.',
+      },
+      {
+        title: 'Stable Metal Chassis',
+        description:
+          'A rigid frame and weighted base keep the mixer steady while maintaining a premium look and feel.',
+      },
+    ],
+    specifications: {
+      'Motor Power': '900W',
+      'Bowl Capacity': '7.2 Liters',
+      'Speed Settings': '12',
+      Weight: '12.4 kg',
+      Dimensions: '38 x 25 x 39 cm',
+      Warranty: '5 Years',
+    },
+    galleryImages: [
+      '/assets/IMG_65FCB60F7E9F-14.jpeg',
+      '/assets/IMG_65FCB60F7E9F-15.jpeg',
+      '/assets/IMG_65FCB60F7E9F-16.jpeg',
+    ],
+    isFeatured: false,
+    isNew: true,
+  },
+  {
+    id: 'signature-toaster',
+    name: 'Signature Toaster',
+    category: 'Toasters',
+    tagline: 'Crisp edges, golden center',
+    price: 429,
+    description:
+      'The Kozano Signature Toaster combines precision browning with a clean, architectural silhouette. Its intelligent heat management adapts to your routine for reliably even toast every time.',
+    colors: [
+      {
+        id: 'stainless',
+        name: 'Stainless',
+        hex: '#A3A3A3',
+        image: '/assets/tost.jpeg',
+      },
+      {
+        id: 'obsidian',
+        name: 'Obsidian',
+        hex: '#111827',
+        image: '/assets/tost2.jpeg',
+      },
+    ],
+    features: [
+      {
+        title: 'EvenHeat Algorithm',
+        description:
+          'Balances radiant and convection heat for uniform browning from the first slice to the last.',
+      },
+      {
+        title: 'Lift & Look',
+        description:
+          'Check progress without interrupting the cycle to dial in the perfect shade of toast.',
+      },
+      {
+        title: 'Wide Artisan Slots',
+        description:
+          'Handles bagels and thick bread comfortably while keeping results consistent and crisp.',
+      },
+    ],
+    specifications: {
+      Power: '2000W',
+      Slots: '2',
+      'Browning Levels': '9',
+      Weight: '2.4 kg',
+      Dimensions: '28 x 18 x 21 cm',
+      Warranty: '3 Years',
+    },
+    galleryImages: ['/assets/tost.jpeg', '/assets/tost2.jpeg', '/assets/tost.jpeg'],
+    isFeatured: false,
+    isNew: false,
+  },
+  {
+    id: 'panoramic-refrigerator',
+    name: 'Panoramic Refrigerator',
+    category: 'Refrigerators',
+    tagline: 'Freshness, beautifully organized',
+    price: 5799,
+    description:
+      'The Kozano Panoramic Refrigerator is designed around visibility and control. With flexible storage zones, refined lighting, and advanced cooling stability, it keeps ingredients pristine and accessible.',
+    colors: [
+      {
+        id: 'steel',
+        name: 'Brushed Steel',
+        hex: '#9CA3AF',
+        image: '/assets/IMG_65FCB60F7E9F-21.jpeg',
+      },
+      {
+        id: 'black-glass',
+        name: 'Black Glass',
+        hex: '#111827',
+        image: '/assets/IMG_65FCB60F7E9F-27.jpeg',
+      },
+      {
+        id: 'pearl',
+        name: 'Pearl',
+        hex: '#F3F4F6',
+        image: '/assets/IMG_65FCB60F7E9F-32.jpeg',
+      },
+    ],
+    features: [
+      {
+        title: 'Adaptive Cooling',
+        description:
+          'Stabilizes temperature quickly after door openings to protect produce, dairy, and frozen items.',
+      },
+      {
+        title: 'Flexible Storage Zones',
+        description:
+          'Reconfigure shelves and bins to match weekly shopping and meal prep without wasted space.',
+      },
+      {
+        title: 'Quiet Night Mode',
+        description:
+          'Reduces sound levels during evening hours while maintaining consistent cooling performance.',
+      },
+    ],
+    specifications: {
+      'Total Capacity': '710 Liters',
+      Refrigerator: '470 Liters',
+      Freezer: '240 Liters',
+      'Energy Rating': 'A+++',
+      Dimensions: '92 x 74 x 179 cm',
+      Warranty: '10 Years',
+    },
+    galleryImages: [
+      '/assets/IMG_65FCB60F7E9F-21.jpeg',
+      '/assets/IMG_65FCB60F7E9F-27.jpeg',
+      '/assets/IMG_65FCB60F7E9F-32.jpeg',
+    ],
+    isFeatured: true,
+    isNew: true,
+  },
+  {
+    id: 'cafe-duo-espresso',
+    name: 'Café Duo Espresso',
+    category: 'Coffee Machines',
+    tagline: 'Brew and steam together',
+    price: 2899,
+    description:
+      'Café Duo Espresso focuses on rhythm: stable extraction, confident steaming, and simple controls. A premium build and balanced workflow help you make café-style drinks at home.',
+    colors: [
+      {
+        id: 'polished',
+        name: 'Polished',
+        hex: '#E5E7EB',
+        image: '/assets/IMG_65FCB60F7E9F-18.jpeg',
+      },
+      {
+        id: 'carbon',
+        name: 'Carbon',
+        hex: '#111827',
+        image: '/assets/IMG_65FCB60F7E9F-19.jpeg',
+      },
+    ],
+    features: [
+      {
+        title: 'Stable Extraction',
+        description:
+          'Fine temperature control supports repeatable shots and consistent flavor from bean to bean.',
+      },
+      {
+        title: 'Powerful Steam',
+        description:
+          'Create glossy microfoam quickly for cappuccinos, lattes, and flat whites with minimal effort.',
+      },
+      {
+        title: 'Low-Mess Maintenance',
+        description:
+          'Easy-access cleaning and smart reminders help keep the system performing at its best.',
+      },
+    ],
+    specifications: {
+      'Boiler Capacity': '2.2L + 1.4L',
+      'Pump Pressure': '15 Bar',
+      'Water Tank': '3.0 Liters',
+      Weight: '17 kg',
+      Dimensions: '39 x 34 x 41 cm',
+      Warranty: '5 Years',
+    },
+    galleryImages: [
+      '/assets/IMG_65FCB60F7E9F-18.jpeg',
+      '/assets/IMG_65FCB60F7E9F-19.jpeg',
+      '/assets/IMG_65FCB60F7E9F-20.jpeg',
+    ],
+    isFeatured: false,
+    isNew: false,
   },
 ]
 

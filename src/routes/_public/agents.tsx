@@ -1,7 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'motion/react'
-import { MapPin, Phone, Mail, Globe, Clock } from 'lucide-react'
-import { useState } from 'react'
+import { MapPin, Phone, Mail, Globe, Clock, Search } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export const Route = createFileRoute('/_public/agents')({
   component: AgentsPage,
@@ -111,24 +118,60 @@ const agents = [
 
 function AgentsPage() {
   const [activeRegion, setActiveRegion] = useState('All Regions')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [activeCity, setActiveCity] = useState('All Cities')
 
-  const filteredAgents =
-    activeRegion === 'All Regions'
+  const baseAgents = useMemo(() => {
+    return activeRegion === 'All Regions'
       ? agents
       : agents.filter((agent) => agent.region === activeRegion)
+  }, [activeRegion])
+
+  const cityOptions = useMemo(() => {
+    const uniqueCities = Array.from(new Set(baseAgents.map((a) => a.city))).sort()
+    return ['All Cities', ...uniqueCities]
+  }, [baseAgents])
+
+  useEffect(() => {
+    if (!cityOptions.includes(activeCity)) setActiveCity('All Cities')
+  }, [activeCity, cityOptions])
+
+  const regionAndCityAgents =
+    activeCity === 'All Cities'
+      ? baseAgents
+      : baseAgents.filter((agent) => agent.city === activeCity)
+
+  const normalizedQuery = searchQuery.trim().toLowerCase()
+  const filteredAgents =
+    normalizedQuery.length === 0
+      ? regionAndCityAgents
+      : regionAndCityAgents.filter((agent) => {
+          const haystack = `${agent.name} ${agent.region} ${agent.country} ${agent.city} ${agent.address}`
+            .toLowerCase()
+          return haystack.includes(normalizedQuery)
+        })
+
+  const headquarters = agents[0]
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen pt-20 bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E3A5F]/20 to-transparent" />
+        <div className="absolute inset-0">
+          <img
+            src="/assets/imagedealers.png"
+            alt="Distributors Cover"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block text-[#B8860B] text-sm tracking-widest uppercase mb-4"
+            className="inline-block text-primary text-sm tracking-widest uppercase mb-4"
           >
             Worldwide Presence
           </motion.span>
@@ -139,38 +182,87 @@ function AgentsPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-serif text-5xl md:text-6xl lg:text-7xl text-white mb-6"
           >
-            Showrooms & Dealers
+            Distributors & Dealers
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-2xl mx-auto text-white/60 text-lg"
+            className="max-w-2xl mx-auto text-white/80 text-lg"
           >
-            Experience Kozano luxury in person at our flagship showrooms and
+            Experience Kozano luxury in person at our flagship distributors and
             authorized dealers around the world.
           </motion.p>
         </div>
       </section>
 
       {/* Filter Bar */}
-      <section className="sticky top-20 z-40 bg-[#0a0a0a]/80 backdrop-blur-xl border-y border-white/10">
+      <section className="sticky top-20 z-40 bg-background/80 backdrop-blur-xl border-y border-border/40">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center gap-4 py-4 overflow-x-auto scrollbar-hide">
-            {regions.map((region) => (
-              <button
-                key={region}
-                onClick={() => setActiveRegion(region)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
-                  activeRegion === region
-                    ? 'bg-white text-black'
-                    : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white'
-                }`}
+          <div className="py-4 space-y-4">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px_220px] gap-4 items-end">
+              <label
+                htmlFor="distributors-search"
+                className="block text-xs tracking-widest uppercase text-foreground/60 mb-2 lg:col-span-1"
               >
-                {region}
-              </button>
-            ))}
+                Search
+              </label>
+              <div className="lg:col-span-1">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/50" />
+                  <input
+                    id="distributors-search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search by city, country, or showroom"
+                    className="w-full h-11 rounded-xl bg-background/60 border border-border/40 pl-10 pr-3 text-sm text-foreground placeholder:text-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs tracking-widest uppercase text-foreground/60 mb-2">
+                  Region
+                </label>
+                <Select
+                  value={activeRegion}
+                  onValueChange={(value) => {
+                    setActiveRegion(value)
+                    setActiveCity('All Cities')
+                  }}
+                >
+                  <SelectTrigger className="w-full h-11 rounded-xl bg-background/60 border-border/40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background/90 backdrop-blur-xl border-border/60">
+                    {regions.map((region) => (
+                      <SelectItem key={region} value={region}>
+                        {region}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <label className="block text-xs tracking-widest uppercase text-foreground/60 mb-2">
+                  City
+                </label>
+                <Select value={activeCity} onValueChange={setActiveCity}>
+                  <SelectTrigger className="w-full h-11 rounded-xl bg-background/60 border-border/40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background/90 backdrop-blur-xl border-border/60">
+                    {cityOptions.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -182,15 +274,124 @@ function AgentsPage() {
             layout
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {filteredAgents.map((agent, index) => (
-              <AgentCard key={agent.id} agent={agent} index={index} />
-            ))}
+            {filteredAgents.length > 0 ? (
+              filteredAgents.map((agent, index) => (
+                <AgentCard key={agent.id} agent={agent} index={index} />
+              ))
+            ) : (
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="md:col-span-2 lg:col-span-3"
+              >
+                <div className="rounded-2xl border border-border/40 bg-foreground/5 p-8">
+                  <div className="flex items-center justify-between gap-6 flex-wrap">
+                    <div>
+                      <h3 className="font-serif text-2xl text-foreground mb-2">
+                        No distributors found
+                      </h3>
+                      <p className="text-foreground/60 text-sm">
+                        Try a different keyword, or contact our headquarters for help.
+                      </p>
+                    </div>
+                    <a
+                      href="mailto:info@kozano.com"
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:opacity-90 px-6 py-3 rounded-lg font-medium transition-colors text-sm"
+                    >
+                      <Mail className="w-4 h-4" />
+                      Email Headquarters
+                    </a>
+                  </div>
+
+                  <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                    <div className="rounded-2xl overflow-hidden border border-border/40 bg-background/60">
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        <img
+                          src={headquarters.image}
+                          alt={headquarters.name}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1 bg-primary text-primary-foreground text-xs tracking-wider uppercase rounded-full">
+                            Headquarters
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h4 className="font-serif text-2xl text-foreground mb-1">
+                          {headquarters.name}
+                        </h4>
+                        <p className="text-muted-foreground text-sm mb-4">
+                          {headquarters.city}, {headquarters.country}
+                        </p>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3 text-foreground/60 text-sm">
+                            <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                            <span>{headquarters.address}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-foreground/60 text-sm">
+                            <Phone className="w-4 h-4 flex-shrink-0" />
+                            <a
+                              href={`tel:${headquarters.phone}`}
+                              className="hover:text-foreground transition-colors"
+                            >
+                              {headquarters.phone}
+                            </a>
+                          </div>
+                          <div className="flex items-center gap-3 text-foreground/60 text-sm">
+                            <Mail className="w-4 h-4 flex-shrink-0" />
+                            <a
+                              href={`mailto:${headquarters.email}`}
+                              className="hover:text-foreground transition-colors"
+                            >
+                              {headquarters.email}
+                            </a>
+                          </div>
+                          <div className="flex items-center gap-3 text-foreground/60 text-sm">
+                            <Clock className="w-4 h-4 flex-shrink-0" />
+                            <span>{headquarters.hours}</span>
+                          </div>
+                          <div className="flex items-center gap-3 text-foreground/60 text-sm">
+                            <Globe className="w-4 h-4 flex-shrink-0" />
+                            <a
+                              href={`https://${headquarters.website}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:text-foreground transition-colors"
+                            >
+                              {headquarters.website}
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-2xl border border-border/40 bg-background/60 p-6">
+                      <h4 className="font-serif text-2xl text-foreground mb-2">
+                        Want to become a distributor?
+                      </h4>
+                      <p className="text-foreground/60 text-sm mb-5">
+                        Send us your company details and region, and our partnerships team will get back to you.
+                      </p>
+                      <a
+                        href="mailto:info@kozano.com"
+                        className="inline-flex items-center gap-2 border border-border/60 hover:bg-foreground/5 px-6 py-3 rounded-lg font-medium transition-colors text-sm"
+                      >
+                        <Mail className="w-4 h-4 text-primary" />
+                        Contact Partnerships
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </section>
 
       {/* Contact CTA */}
-      <section className="py-24 lg:py-32 border-t border-white/10">
+      <section className="py-24 lg:py-32 border-t border-border/40">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -198,16 +399,16 @@ function AgentsPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl text-foreground mb-6">
               Can't Find a Location?
             </h2>
-            <p className="text-white/60 text-lg mb-8">
+            <p className="text-foreground/60 text-lg mb-8">
               Contact our team to find the nearest authorized dealer or inquire
               about becoming a Kozano partner.
             </p>
             <a
               href="mailto:info@kozano.com"
-              className="inline-flex items-center gap-2 bg-white text-black hover:bg-white/90 px-8 py-4 rounded-lg font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:opacity-90 px-8 py-4 rounded-lg font-medium transition-colors"
             >
               <Mail className="w-5 h-5" />
               Contact Us
@@ -232,7 +433,7 @@ function AgentCard({ agent, index }: AgentCardProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 40 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all"
+      className="group bg-foreground/5 border border-border/40 rounded-2xl overflow-hidden hover:bg-foreground/10 transition-all"
     >
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -243,7 +444,7 @@ function AgentCard({ agent, index }: AgentCardProps) {
         />
         {agent.isflagship && (
           <div className="absolute top-4 right-4">
-            <span className="px-3 py-1 bg-[#B8860B] text-white text-xs tracking-wider uppercase rounded-full">
+            <span className="px-3 py-1 bg-primary text-primary-foreground text-xs tracking-wider uppercase rounded-full">
               Flagship
             </span>
           </div>
@@ -252,51 +453,51 @@ function AgentCard({ agent, index }: AgentCardProps) {
 
       {/* Content */}
       <div className="p-6">
-        <h3 className="font-serif text-2xl text-white mb-1 group-hover:text-[#C0C0C0] transition-colors">
+        <h3 className="font-serif text-2xl text-foreground mb-1 group-hover:text-muted-foreground transition-colors">
           {agent.name}
         </h3>
-        <p className="text-white/40 text-sm mb-4">
+        <p className="text-muted-foreground text-sm mb-4">
           {agent.city}, {agent.country}
         </p>
 
         <div className="space-y-3">
-          <div className="flex items-start gap-3 text-white/60 text-sm">
+          <div className="flex items-start gap-3 text-foreground/60 text-sm">
             <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
             <span>{agent.address}</span>
           </div>
 
-          <div className="flex items-center gap-3 text-white/60 text-sm">
+          <div className="flex items-center gap-3 text-foreground/60 text-sm">
             <Phone className="w-4 h-4 flex-shrink-0" />
             <a
               href={`tel:${agent.phone}`}
-              className="hover:text-white transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               {agent.phone}
             </a>
           </div>
 
-          <div className="flex items-center gap-3 text-white/60 text-sm">
+          <div className="flex items-center gap-3 text-foreground/60 text-sm">
             <Mail className="w-4 h-4 flex-shrink-0" />
             <a
               href={`mailto:${agent.email}`}
-              className="hover:text-white transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               {agent.email}
             </a>
           </div>
 
-          <div className="flex items-center gap-3 text-white/60 text-sm">
+          <div className="flex items-center gap-3 text-foreground/60 text-sm">
             <Clock className="w-4 h-4 flex-shrink-0" />
             <span>{agent.hours}</span>
           </div>
 
-          <div className="flex items-center gap-3 text-white/60 text-sm">
+          <div className="flex items-center gap-3 text-foreground/60 text-sm">
             <Globe className="w-4 h-4 flex-shrink-0" />
             <a
               href={`https://${agent.website}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               {agent.website}
             </a>
