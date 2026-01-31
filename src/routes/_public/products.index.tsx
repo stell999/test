@@ -186,8 +186,8 @@ function ProductsPage() {
               className={cn(
                 "hidden md:block h-full transition-all duration-300",
                 isSidebarOpen
-                  ? "w-[260px] pl-6 pr-6 opacity-100"
-                  : "w-0 pl-0 pr-0 opacity-0 border-none overflow-hidden"
+                ? "w-[260px] pl-0 pr-6 opacity-100"
+                : "w-0 pl-0 pr-0 opacity-0 border-none overflow-hidden"
               )}
             >
               <div className="sticky top-20 lg:top-24 max-h-[calc(100vh-5rem)] lg:max-h-[calc(100vh-6rem)] overflow-auto flex flex-col">
