@@ -25,11 +25,16 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentLang, setCurrentLang] = useState('en')
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/' || location.pathname === '/_public/' || location.pathname === '/products' || location.pathname === '/products/'
   const [headerVariant, setHeaderVariant] = useState<'transparent' | 'white'>(isHome ? 'transparent' : 'white')
   const variantRef = useRef<'transparent' | 'white'>(isHome ? 'transparent' : 'white')
   const rafRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const threshold = 24
@@ -149,7 +154,7 @@ export function Header() {
                 aria-label="Toggle theme"
                 type="button"
               >
-                {theme === 'dark' ? (
+                {mounted && theme === 'dark' ? (
                   <Sun className="w-5 h-5 text-primary" />
                 ) : (
                   <Moon className="w-5 h-5 text-primary" />
