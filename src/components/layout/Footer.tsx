@@ -147,9 +147,11 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             className="flex flex-col sm:flex-row items-center gap-4"
           >
-            <span className="font-serif text-2xl font-semibold tracking-[0.18em] text-foreground">
-              <span className="text-primary">KO</span>ZANO
-            </span>
+            <img
+              src="/logo.png"
+              alt="Kozano"
+              className="h-10 w-auto object-contain"
+            />
             <span className="text-muted-foreground text-sm">
               © {new Date().getFullYear()} Kozano. All rights reserved.
             </span>

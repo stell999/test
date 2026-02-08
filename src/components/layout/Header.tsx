@@ -85,12 +85,6 @@ export function Header() {
 
   const activeLinkClassName = "text-primary font-bold"
 
-  const topLinkClassName = isWhite
-    ? 'text-foreground/60 hover:text-foreground'
-    : isTransparent
-      ? 'text-white/60 hover:text-white'
-      : 'text-foreground/60 hover:text-foreground'
-
   const buttonClassName = isWhite
     ? 'text-foreground hover:bg-accent/40'
     : isTransparent
@@ -104,16 +98,7 @@ export function Header() {
       <nav className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="hidden lg:block h-24">
           <div className="grid grid-cols-3 items-center h-16">
-            <div
-              className={`flex items-center gap-6 text-[11px] tracking-widest uppercase transition-colors ${topLinkClassName}`}
-            >
-              <Link to="/about" className="transition-colors">
-                Worldwide
-              </Link>
-              <Link to="/news" className="transition-colors">
-                Sustainability
-              </Link>
-            </div>
+            <div />
             <Link to="/" className="justify-self-center">
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
@@ -189,16 +174,19 @@ export function Header() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between h-20 lg:hidden">
+        <div className="flex items-center justify-between h-16 lg:hidden">
           <Link to="/" className="relative z-10">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex items-center gap-3"
+              className="flex items-center"
             >
-              <img src="/iconlogo.png" alt="Kozano" className="h-9 w-9 rounded-md" />
-              <img src="/logo.png" alt="Kozano" className="h-7 w-auto" />
+              <img
+                src="/iconlogo.png"
+                alt="Kozano"
+                className="h-8 w-8 rounded-full object-cover"
+              />
             </motion.div>
           </Link>
 
@@ -214,7 +202,7 @@ export function Header() {
               aria-label="Toggle theme"
               type="button"
             >
-              {theme === 'dark' ? (
+              {mounted && theme === 'dark' ? (
                 <Sun className="w-5 h-5 text-primary" />
               ) : (
                 <Moon className="w-5 h-5 text-primary" />

@@ -100,13 +100,13 @@ function ProductsPage() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
       <section className="relative h-screen overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#0b0b0c]">
+        <div className="absolute inset-0 bg-[#0b0b0c] overflow-hidden">
           {currentVideoId ? (
             <iframe
               key={currentVideoId}
               src={`https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&mute=1&loop=1&playlist=${currentVideoId}&controls=0&modestbranding=1&rel=0&playsinline=1`}
               title="Category Video"
-              className="h-full w-full object-cover pointer-events-none"
+              className="absolute left-1/2 top-1/2 h-[56.25vw] w-[100vw] min-h-[100vh] min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
               allow="autoplay; encrypted-media"
               allowFullScreen
             />
@@ -121,7 +121,7 @@ function ProductsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block text-white/80 text-sm tracking-widest uppercase mb-4"
+            className="inline-block text-white/80 text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4"
           >
             {activeCategory === 'All' ? 'Our Collection' : activeCategory}
           </motion.span>
@@ -129,7 +129,7 @@ function ProductsPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-serif text-5xl md:text-6xl lg:text-7xl text-white mb-6"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-4 sm:mb-6"
           >
             {activeCategory === 'All' ? 'Luxury Appliances' : `Premium ${activeCategory}`}
           </motion.h1>
@@ -137,7 +137,7 @@ function ProductsPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-2xl mx-auto text-white/70 text-lg"
+            className="max-w-2xl mx-auto text-white/70 text-sm sm:text-base md:text-lg"
           >
             Discover our complete range of premium kitchen appliances, each
             designed to elevate your culinary experience.
